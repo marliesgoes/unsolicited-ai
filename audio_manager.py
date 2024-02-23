@@ -5,7 +5,6 @@ import sounddevice as sd
 
 from elevenlabs import generate, play
 
-
 class AudioManager:
 
     def __init__(self):
