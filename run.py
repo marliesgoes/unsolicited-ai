@@ -1,5 +1,6 @@
 import sys
 import json
+import time
 import warnings
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -7,6 +8,7 @@ from audio_functions import AudioManager
 from utils import call_gpt, print_robot, print_user
 
 RECORDING_DURATION = 30
+SLEEP_DURATION = 30
 
 def main():
     if len(sys.argv) != 2:
@@ -54,6 +56,8 @@ def main():
         comment = call_gpt(client, messages, "gpt-4-1106-preview")
         print_robot(comment)
         am.stream_and_play(comment, voice_id)
+
+        time.sleep(SLEEP_DURATION)
 
 
 if __name__ == "__main__":
