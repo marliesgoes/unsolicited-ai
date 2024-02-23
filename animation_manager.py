@@ -2,7 +2,6 @@ import time
 import glob
 import pygame
 
-
 class AnimationManager:
     def __init__(self):
         # Initialize Pygame
@@ -13,14 +12,14 @@ class AnimationManager:
         self.screen_height = 600
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         
-        self.mouth_images_talking = [pygame.image.load(image) for image in sorted(glob.glob('images/marlies/talking*.png'))]
-        self.mouth_images_idle = [pygame.image.load(image) for image in sorted(glob.glob('images/marlies/idle*.png'))]
+        self.frames_talking = [pygame.image.load(image) for image in sorted(glob.glob('images/marlies/talking*.png'))]
+        self.frames_idle = [pygame.image.load(image) for image in sorted(glob.glob('images/marlies/idle*.png'))]
 
         
     def animate_character(self, speaking=True):
         running = True
         index = 0
-        frames = self.mouth_images_talking if speaking else self.mouth_images_idle
+        frames = self.frames_talking if speaking else self.frames_idle
 
         while running:
             for event in pygame.event.get():
@@ -37,4 +36,4 @@ class AnimationManager:
 
 if __name__ == '__main__':
     anim_manager = AnimationManager()
-    anim_manager.animate_character(speaking=False)  # Start the talking animation
+    anim_manager.animate_character(speaking=True)  # Start the talking animation
