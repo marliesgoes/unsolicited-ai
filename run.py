@@ -4,7 +4,7 @@ import time
 import warnings
 from openai import OpenAI
 from dotenv import load_dotenv
-from audio_functions import AudioManager
+from audio_manager import AudioManager
 from utils import call_gpt, print_robot, print_user
 
 RECORDING_DURATION = 30
