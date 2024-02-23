@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 from audio_manager import AudioManager
 from utils import call_gpt, print_robot, print_user
 
-RECORDING_DURATION = 30
-SLEEP_DURATION = 30
+RECORDING_DURATION = 10
+SLEEP_DURATION = 10
 
 def main():
     if len(sys.argv) != 2:
@@ -46,6 +46,7 @@ def main():
         gpt_prompt = f"""
             You are an character with the following persona: {personal_prompt}.
             You are supposed to respond to the following discussion: {transcribed_audio}.
+            Repeat the part of the discussion you are commenting on, before giving your opinion.
         """
 
         messages = [{
