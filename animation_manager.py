@@ -33,6 +33,27 @@ class AnimationManager:
             time.sleep(0.3)  # Adjust for realistic speaking speed
 
         pygame.quit()
+    
+    def animate_character_with_audio(self, audio_path, speaking=True):
+        pygame.mixer.music.load(audio_path)
+        pygame.mixer.music.play()
+        running = True
+        index = 0
+        frames = self.frames_talking if speaking else self.frames_idle
+        
+        while running and pygame.mixer.music.get_busy():
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                    pygame.mixer.music.stop()
+
+            self.screen.fill((255, 255, 255))
+            self.screen.blit(frames[index], (100, 100))
+            index = (index + 1) % len(frames)
+            pygame.display.flip()
+            time.sleep(0.1)  # Adjust for realistic speaking speed
+
+        pygame.quit()
 
 if __name__ == '__main__':
     anim_manager = AnimationManager()
