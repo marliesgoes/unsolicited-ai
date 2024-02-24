@@ -9,7 +9,7 @@ from utils import call_gpt, print_robot, print_user
 from animation_manager import AnimationManager
 
 RECORDING_DURATION = 5
-SLEEP_DURATION = 10
+SLEEP_DURATION = 3
 
 def main():
     if len(sys.argv) != 2:
@@ -38,6 +38,7 @@ def main():
 
     while True:
         # Record and save the user's speech
+        print("top")
         audio = am.record_audio(duration=RECORDING_DURATION)
         audio_path = am.save_audio(audio)
 
@@ -59,11 +60,14 @@ def main():
         comment = call_gpt(client, messages, "gpt-4-1106-preview")
         print_robot(comment)
         # am.stream_and_play(comment, voice_id)
+        print("about to stream")
         audio_path = am.stream_and_play(comment, voice_id)
         anim_manager.animate_character_with_audio(audio_path, speaking=True)
 
         # anim_manager.animate_character(speaking=True)
         time.sleep(SLEEP_DURATION)
+    
+    # pygame.quit()
 
 
 if __name__ == "__main__":

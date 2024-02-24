@@ -26,7 +26,12 @@ class AnimationManager:
                 if event.type == pygame.QUIT:
                     running = False
 
-            self.screen.fill((255, 255, 255))  # White background
+            self.screen.fill((255, 255, 255))  
+            if not pygame.mixer.music.get_busy() and speaking:
+                frames = self.frames_idle
+                speaking = False  
+
+
             self.screen.blit(frames[index], (100, 100))
             index = (index + 1) % len(frames)
             pygame.display.flip()
@@ -52,9 +57,14 @@ class AnimationManager:
             index = (index + 1) % len(frames)
             pygame.display.flip()
             time.sleep(0.1)  # Adjust for realistic speaking speed
+            
 
-        pygame.quit()
+        # pygame.quit()\
+    
+                
 
 if __name__ == '__main__':
     anim_manager = AnimationManager()
     anim_manager.animate_character(speaking=True)  # Start the talking animation
+
+
