@@ -3,14 +3,14 @@ import tkinter as tk
 import glob
 
 class AnimationManager:
-    def __init__(self):
+    def __init__(self, persona):
         self.root = tk.Tk()
         self.root.title("Character Animation")
         self.canvas = tk.Canvas(self.root, width=800, height=600)
         self.canvas.pack()
 
-        self.frames_talking = [Image.open(image) for image in sorted(glob.glob('images/marlies/speaking*.png'))]
-        self.frames_idle = [Image.open(image) for image in sorted(glob.glob('images/marlies/idle*.png'))]
+        self.frames_talking = [Image.open(image) for image in sorted(glob.glob(f'images/{persona}/speaking*.png'))]
+        self.frames_idle = [Image.open(image) for image in sorted(glob.glob(f'images/{persona}/idle*.png'))]
         self.current_frame_index = 0
         self.frames = self.frames_idle  # Start with idle frames
         self.speaking = False  # Track speaking state

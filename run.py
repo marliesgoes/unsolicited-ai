@@ -12,16 +12,7 @@ from utils import call_gpt, print_robot, print_user
 RECORDING_DURATION = 5
 SLEEP_DURATION = 3
 
-def handle_audio_and_animation(anim_manager):
-    parser = argparse.ArgumentParser(description="Run conversational AI with optional silent mode.")
-    parser.add_argument('persona', type=str, help='Persona to use for the conversation.')
-    parser.add_argument('--silent', action='store_true', help='Toggle off audio output if set.')
-
-    args = parser.parse_args()
-
-    persona = args.persona.upper()
-    silent_mode = args.silent
-
+def handle_audio_and_animation(anim_manager, persona, silent_mode):
     with open('personas.json', 'r') as file:
         data = json.load(file)
 
@@ -61,7 +52,16 @@ def handle_audio_and_animation(anim_manager):
         time.sleep(SLEEP_DURATION)
 
 if __name__ == "__main__":
-    anim_manager = AnimationManager()
-    audio_thread = Thread(target=handle_audio_and_animation, args=(anim_manager,), daemon=True)
+    parser = argparse.ArgumentParser(description="Run conversational AI with optional silent mode.")
+    parser.add_argument('persona', type=str, help='Persona to use for the conversation.')
+    parser.add_argument('--silent', action='store_true', help='Toggle off audio output if set.')
+
+    args = parser.parse_args()
+
+    persona = args.persona.upper()
+    silent_mode = args.silent
+
+    anim_manager = AnimationManager(persona)
+    audio_thread = Thread(target=handle_audio_and_animation, args=(anim_manager, persona, silent_mode,), daemon=True)
     audio_thread.start()
     anim_manager.run()
