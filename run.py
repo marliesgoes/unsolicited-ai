@@ -1,7 +1,5 @@
-import sys
 import json
 import time
-import signal
 import warnings
 import argparse
 from openai import OpenAI
@@ -53,15 +51,8 @@ def handle_audio_and_animation(anim_manager, persona, silent_mode):
 
         time.sleep(SLEEP_DURATION)
 
-def signal_handler(sig, frame):
-    print('Gracefully shutting down...')
-    # Perform any cleanup here. For threads, you might set a flag that they check to exit cleanly.
-    # Since your threads are daemon threads, they'll be terminated when the main thread exits, but you can add any custom cleanup logic here.
-    sys.exit(0)
 
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, signal_handler)
-
     parser = argparse.ArgumentParser(description="Run conversational AI with optional silent mode.")
     parser.add_argument('persona', type=str, help='Persona to use for the conversation.')
     parser.add_argument('--silent', action='store_true', help='Toggle off audio output if set.')
