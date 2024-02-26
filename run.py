@@ -6,9 +6,10 @@ from openai import OpenAI
 from dotenv import load_dotenv
 from audio_manager import AudioManager
 from utils import call_gpt, print_robot, print_user
+from animation_manager import AnimationManager
 
-RECORDING_DURATION = 10
-SLEEP_DURATION = 10
+RECORDING_DURATION = 5
+SLEEP_DURATION = 3
 
 def main():
     parser = argparse.ArgumentParser(description="Run conversational AI with optional silent mode.")
@@ -30,8 +31,10 @@ def main():
     load_dotenv()
     client = OpenAI()
     am = AudioManager()
+    anim_manager = AnimationManager()
 
     while True:
+        print("top")
         audio = am.record_audio(duration=RECORDING_DURATION)
         audio_path = am.save_audio(audio)
 
@@ -49,10 +52,13 @@ def main():
         print_robot(comment)
 
         if not silent_mode:
-            am.stream_and_play(comment, voice_id)
+            print("about to stream")
+            audio_path = am.stream_and_play(comment, voice_id)
+            anim_manager.animate_character_with_audio(audio_path, speaking=True)
         else:
             print("Audio output is disabled. Silent mode is active.")
 
+        # anim_manager.animate_character(speaking=True)
         time.sleep(SLEEP_DURATION)
 
 if __name__ == "__main__":

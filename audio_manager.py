@@ -46,4 +46,10 @@ class AudioManager:
             voice=voice_id,
         )
 
-        play(audio)
+        with open("audio", 'wb') as audio_file:
+            audio_file.write(audio)
+
+        
+        return "audio"
+
+        # play(audio)
