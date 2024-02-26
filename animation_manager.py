@@ -3,16 +3,14 @@ import glob
 import pygame
 
 class AnimationManager:
+
     def __init__(self):
-        # Initialize Pygame
         pygame.init()
-        
-        # Screen dimensions
         self.screen_width = 800
         self.screen_height = 600
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         
-        self.frames_talking = [pygame.image.load(image) for image in sorted(glob.glob('images/marlies/talking*.png'))]
+        self.frames_talking = [pygame.image.load(image) for image in sorted(glob.glob('images/marlies/speaking*.png'))]
         self.frames_idle = [pygame.image.load(image) for image in sorted(glob.glob('images/marlies/idle*.png'))]
 
         
