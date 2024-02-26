@@ -34,7 +34,6 @@ def main():
     anim_manager = AnimationManager()
 
     while True:
-        print("top")
         audio = am.record_audio(duration=RECORDING_DURATION)
         audio_path = am.save_audio(audio)
 
@@ -44,7 +43,7 @@ def main():
         gpt_prompt = f"""
             You are an character with the following persona: {personal_prompt}.
             You are supposed to respond to the following discussion: {transcribed_audio}.
-            Repeat the part of the discussion you are commenting on, before giving your opinion.
+            Repeat the part of the discussion you are commenting on in form of a question, before giving your opinion.
         """
 
         messages = [{'role': 'user', 'content': gpt_prompt}]
@@ -58,7 +57,6 @@ def main():
         else:
             print("Audio output is disabled. Silent mode is active.")
 
-        # anim_manager.animate_character(speaking=True)
         time.sleep(SLEEP_DURATION)
 
 if __name__ == "__main__":
