@@ -9,8 +9,8 @@ from audio_manager import AudioManager
 from animation_manager import AnimationManager
 from utils import call_gpt, print_robot, print_user
 
-RECORDING_DURATION = 5
-SLEEP_DURATION = 3
+RECORDING_DURATION = 30
+SLEEP_DURATION = 0
 
 def handle_audio_and_animation(anim_manager, persona, silent_mode):
     with open('personas.json', 'r') as file:
@@ -35,7 +35,6 @@ def handle_audio_and_animation(anim_manager, persona, silent_mode):
         gpt_prompt = f"""
             You are an character with the following persona: {personal_prompt}.
             You are supposed to respond to the following discussion: {transcribed_audio}.
-            Repeat the part of the discussion you are commenting on in form of a question, before giving your opinion.
         """
 
         messages = [{'role': 'user', 'content': gpt_prompt}]
