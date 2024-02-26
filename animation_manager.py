@@ -28,7 +28,7 @@ class AnimationManager:
         self.canvas.create_image(400, 300, image=tk_img)
         self.canvas.image = tk_img  # Keep reference
         self.current_frame_index = (self.current_frame_index + 1) % len(self.frames)
-        self.root.after(100, self.update_animation)
+        self.root.after(50, self.update_animation)
 
     def run(self):
         self.update_animation()  # Start the animation
