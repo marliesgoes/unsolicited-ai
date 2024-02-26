@@ -3,7 +3,7 @@ import wavio
 import whisper
 import sounddevice as sd
 
-from elevenlabs import generate, play
+from elevenlabs import generate, stream
 
 class AudioManager:
 
@@ -40,13 +40,12 @@ class AudioManager:
         """
         Use ElevenLabs' API to stream the audio and play the bot's response.
         """
-        audio = generate(
+        audio_stream = generate(
             api_key=self.api_key,
             text=text,
             voice=voice_id,
+            stream=True,
         )
+        stream(audio_stream)
 
-        # with open("audio", 'wb') as audio_file:
-        #     audio_file.write(audio)
-        
-        play(audio)
+

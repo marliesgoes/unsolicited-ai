@@ -16,6 +16,6 @@ Install requirements.
 
 ```
 pip install -r requirements.txt
-brew install ffmpeg
+brew install mpv
 ```
 
