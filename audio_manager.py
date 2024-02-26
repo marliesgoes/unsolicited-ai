@@ -40,12 +40,23 @@ class AudioManager:
         """
         Use ElevenLabs' API to stream the audio and play the bot's response.
         """
-        audio_stream = generate(
-            api_key=self.api_key,
-            text=text,
-            voice=voice_id,
-            stream=True,
-        )
+        try:
+            audio_stream = generate(
+                api_key=self.api_key,
+                text=text,
+                voice=voice_id,
+                stream=True,
+            )
+        except ValueError as e:
+            print(e)
+            print('Using default voice')
+            audio_stream = generate(
+                api_key=self.api_key,
+                text=text,
+                voice='lFJii4QK4x8A1BK8fpFi',
+                stream=True,
+            )
+
         stream(audio_stream)
 
 
