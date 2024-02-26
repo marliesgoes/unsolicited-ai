@@ -1,0 +1,10 @@
+wavio
+openai
+python-dotenv
+whisper
+requests
+sounddevice
+pydub
+git+https://github.com/openai/whisper.git
+elevenlabs==0.3.0b0
+pillow
