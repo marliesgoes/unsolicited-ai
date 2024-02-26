@@ -33,7 +33,7 @@ def handle_audio_and_animation(anim_manager, persona, silent_mode):
         print_user(transcribed_audio)
 
         gpt_prompt = f"""
-            You are an character with the following persona: {personal_prompt}.
+            You are a character with the following persona: {personal_prompt}.
             You are supposed to respond to the following discussion: {transcribed_audio}.
         """
 
